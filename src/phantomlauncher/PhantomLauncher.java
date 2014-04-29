@@ -23,7 +23,7 @@ public class PhantomLauncher extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml")); // Byt mellan SignUp.fxml och LoginFXML.fxml
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml")); // Byt mellan SignUp.fxml och LoginFXML.fxml
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

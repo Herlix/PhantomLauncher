@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="phantomlauncher.Profile">
+  <children>
+    <Text fx:id="userName" layoutX="131.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+    <Text fx:id="firstName" layoutX="131.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname" />
+    <Text fx:id="lastName" layoutX="131.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastname" />
+    <Text fx:id="email" layoutX="131.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+    <Text fx:id="age" layoutX="131.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age" />
+    <ImageView fitHeight="81.75" fitWidth="109.0" layoutX="22.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../../Popeye.jpg" />
+      </image>
+    </ImageView>
+  </children>
+</AnchorPane>

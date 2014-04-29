@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.text.*;
 
 /**
  *
@@ -22,21 +24,19 @@ import javafx.scene.control.Button;
  */
 public class Login implements Initializable {
 
+    static Connection con = null;
+    
     @FXML
     private TextField idUser;
     @FXML
-    private TextField passID;
+    private PasswordField passID;
     @FXML
-    private TextField userName;
-    @FXML
-    private TextField fullName;
-    @FXML
-    private TextField error;
+    private Text error;
     @FXML
     private Button login;
     @FXML
-    private Button logout;
-    
+    private Button signUp;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -53,32 +53,23 @@ public class Login implements Initializable {
         passID.setText("");
     }
 
+    @FXML
+    public void signUpAction(ActionEvent event) {
+        //todo
+    }
+
     public void loginDB() {
         String dbUser = idUser.getText();
         String dbPasswd = passID.getText();
-        Connection con = null;
+
         String driver = "com.mysql.jdbc.Driver";
         try {
             Class.forName(driver);
             con = DriverManager.getConnection("jdbc:mysql://localhost:4321/" + "phantom", dbUser, dbPasswd);
-
+            error.setText("");
         } catch (Exception e) {
-            error.setText("Wrong Login or Password");
-        }
-        try {
-            Statement st = con.createStatement();
-            String sql = "Select* from Users;";
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                String id = rs.getString("idUsers");
-                String firstName = rs.getString("FirstName");
-                String lastName = rs.getString("LastName");
-                String password = rs.getString("Password");
-                userName.setText(id);
-                fullName.setText(firstName + " " + lastName);
+            error.setText("Wrong Username or Password");
 
-            }
-        } catch (Exception ex) {
         }
     }
 
@@ -93,8 +84,9 @@ public class Login implements Initializable {
             int assinged_port = session.setPortForwardingL(4321, "localhost", 3306);
 
         } catch (Exception e) {
-            System.err.print(e);            
+            System.err.print(e);
         }
+
     }
 
 }

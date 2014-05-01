@@ -8,11 +8,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 /**
  *
  * @author Joakim & Alexander
  */
-public class SignUp implements Initializable{
+public class SignUp implements Initializable, ScreenInterface{
     private String userName;
     private String password;
     private String passwordConfirm;
@@ -26,9 +27,9 @@ public class SignUp implements Initializable{
     @FXML
     private TextField signUpUserName;
     @FXML
-    private TextField signUpPassword;
+    private PasswordField signUpPassword;
     @FXML
-    private TextField signUpConfirm;
+    private PasswordField signUpConfirm;
     @FXML
     private TextField signUpFirstName;
     @FXML
@@ -41,6 +42,13 @@ public class SignUp implements Initializable{
     private Button checkButton;
     @FXML
     private Button signUpButton;
+    
+        private ScreenController screen;
+    
+    @Override
+    public void ScreenHandler (ScreenController screen) {
+        this.screen = screen;
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -89,7 +97,8 @@ public class SignUp implements Initializable{
         age = Integer.parseInt(SignUpAge.getText());
         email = SignUpEmail.getText();
         if (userName != null && password.length() > 5 && password.equals(passwordConfirm)&& firstName != null && lastName != null && age > 0 && email != null) {
-            signUp();  
+            signUp(); 
+            screen.setScreen("Login");
         } else {
             System.out.println("Någonting gick fel! Antagligen glömde du trycka på check username");
         }

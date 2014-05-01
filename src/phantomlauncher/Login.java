@@ -22,10 +22,10 @@ import javafx.scene.text.*;
  *
  * @author Alexander & Joakim
  */
-public class Login implements Initializable {
+public class Login implements Initializable, ScreenInterface {
 
     static Connection con = null;
-    
+
     @FXML
     private TextField idUser;
     @FXML
@@ -37,6 +37,13 @@ public class Login implements Initializable {
     @FXML
     private Button signUp;
 
+    private ScreenController screen;
+
+    @Override
+    public void ScreenHandler(ScreenController screen) {
+        this.screen = screen;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -46,6 +53,9 @@ public class Login implements Initializable {
         }
     }
 
+    /*
+     * This is the button event for login.
+     */
     @FXML
     public void loginAction(ActionEvent event) {
         loginDB();
@@ -53,11 +63,17 @@ public class Login implements Initializable {
         passID.setText("");
     }
 
+    /*
+     * This is the button event for the sign up function.
+     */
     @FXML
     public void signUpAction(ActionEvent event) {
-        //todo
+        screen.setScreen("SignUp"); // Switch screen
     }
 
+    /*
+     * This Method logs onto the server using info from the inputfields.
+     */
     public void loginDB() {
         String dbUser = idUser.getText();
         String dbPasswd = passID.getText();
@@ -67,12 +83,17 @@ public class Login implements Initializable {
             Class.forName(driver);
             con = DriverManager.getConnection("jdbc:mysql://localhost:4321/" + "phantom", dbUser, dbPasswd);
             error.setText("");
+            screen.setScreen("Profile"); // Switch screen
         } catch (Exception e) {
             error.setText("Wrong Username or Password");
-
         }
     }
 
+    /*
+     * This Method is used to create a port forward thtough jsch for the
+     * mysql connection. This is run once at startup and is running continuously
+     * throughout the run.
+     */
     public static void sshConnect() {
         try {
             JSch jsch = new JSch();
@@ -81,12 +102,9 @@ public class Login implements Initializable {
             session.setConfig("StrictHostKeyChecking", "no");
             System.out.println("Establishing Connection...");
             session.connect();
-            int assinged_port = session.setPortForwardingL(4321, "localhost", 3306);
-
+            session.setPortForwardingL(4321, "localhost", 3306);
         } catch (Exception e) {
             System.err.print(e);
         }
-
     }
-
 }

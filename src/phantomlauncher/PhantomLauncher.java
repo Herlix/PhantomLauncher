@@ -16,15 +16,27 @@ import javafx.stage.Stage;
  *
  * @author Alexander & Joakim
  */
-public class PhantomLauncher extends Application {    
+public class PhantomLauncher extends Application {
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml")); // Byt mellan SignUp.fxml och LoginFXML.fxml
-        Scene scene = new Scene(root);
+        
+                // We need a handler that keeps track of the different "screens" we 
+        // want to switch between. We also need to add the different
+        // "screens" to that handler.
+        
+        ScreenController handler = new ScreenController(stage);
+        handler.loadScreen("Login", "Login.fxml");
+        handler.loadScreen("SignUp", "SignUp.fxml");
+        handler.loadScreen("Profile", "Profile.fxml");
+        
+        handler.setScreen("Login"); // Start with this screen.
+        
+        Scene scene = new Scene(handler);
         stage.setScene(scene);
         stage.show();
         stage.setTitle("Phantom Launcher");

@@ -15,12 +15,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 import javafx.scene.text.*;
 
+
 /**
  * FXML Controller class
  *
  * @author Alexander
  */
-public class Profile implements Initializable {
+public class Profile implements Initializable, ScreenInterface {
     
     @FXML
     private Text userName;
@@ -32,7 +33,14 @@ public class Profile implements Initializable {
     private Text age;
     @FXML
     private Text email;
-            
+       
+    private ScreenController screen;
+    
+    @Override
+    public void ScreenHandler (ScreenController screen) {
+        this.screen = screen;
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         getInfo();

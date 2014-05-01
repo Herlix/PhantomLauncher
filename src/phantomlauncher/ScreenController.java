@@ -31,11 +31,12 @@ public class ScreenController extends StackPane {
 //       add a nice transitioning between the two "sceens".
 
     // This is needed to resize the window after changing the "screen"
-    private Stage stage;
+    public static Stage stage;
 
     public ScreenController (Stage stage) {
         this.stage = stage;
     }
+    
     // Keep track of all our "screens" and assign each one of them a name
     private HashMap<String, Node> screens = new HashMap<String, Node>();
     
@@ -81,5 +82,5 @@ public class ScreenController extends StackPane {
             System.out.println("Could not find screen, " + name);
             return false;
         }
-    }
+    }    
 }

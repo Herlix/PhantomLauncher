@@ -5,6 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="phantomlauncher.SignUp">
   <children>
@@ -25,5 +26,15 @@
     <Label layoutX="119.0" layoutY="317.0" text="E-mail:" />
     <PasswordField fx:id="signUpPassword" layoutX="183.0" layoutY="100.0" prefWidth="200.0" promptText="Password" />
     <PasswordField fx:id="signUpConfirm" layoutX="183.0" layoutY="145.0" prefWidth="200.0" promptText="Confirm Password" />
+    <Button fx:id="backToLogin" layoutX="564.0" layoutY="8.0" minHeight="15.9609375" minWidth="21.0" mnemonicParsing="false" onAction="#backToLogin" prefHeight="22.0" prefWidth="22.0" text="X" textAlignment="CENTER">
+      <font>
+        <Font name="Times New Roman" size="8.0" />
+      </font>
+    </Button>
+    <Button fx:id="minimize" layoutX="535.0" layoutY="8.0" minHeight="15.9609375" minWidth="21.0" mnemonicParsing="false" onAction="#minimize" prefHeight="22.0" prefWidth="22.0" text="-" textAlignment="CENTER">
+      <font>
+        <Font name="Times New Roman" size="9.0" />
+      </font>
+    </Button>
   </children>
 </AnchorPane>

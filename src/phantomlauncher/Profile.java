@@ -3,52 +3,78 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package phantomlauncher;
 
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javafx.scene.text.*;
-
 
 /**
  * FXML Controller class
  *
- * @author Alexander
+ * @author Alexander & Joakim
  */
 public class Profile implements Initializable, ScreenInterface {
-    
+
     @FXML
-    private Text userName;
+    private static Text userName;
     @FXML
-    private Text firstName;
+    private static Text firstName;
     @FXML
-    private Text lastName;
+    private static Text lastName;
     @FXML
-    private Text age;
+    private static Text age;
     @FXML
-    private Text email;
-       
+    private static Text email;
+    @FXML
+    private static ImageView profileImage;
+    @FXML
+    private Button loadInfo;
+
     private ScreenController screen;
-    
+
     @Override
-    public void ScreenHandler (ScreenController screen) {
+    public void ScreenHandler(ScreenController screen) {
         this.screen = screen;
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        getInfo();
-    }    
-    
-    private void getInfo() {
+    }
+
+    @FXML
+    public void logout(ActionEvent event) throws SQLException {
+        Login.uCon.close(); //Logout user
+        screen.setScreen("Login");
+    }
+
+    /**
+     * Terminate program.
+     */
+    public void closeDown(ActionEvent event) throws SQLException {
+        Login.uCon.close(); //Logout user
+        System.exit(0);
+    }
+
+    /**
+     * Minimize program.
+     */
+    public void minimize(ActionEvent event) {
+        ScreenController.stage.setIconified(true);
+    }
+
+    public static void getInfo() {
         try {
-            Statement st = Login.con.createStatement();
+            Statement st = Login.uCon.createStatement();
             String sql = "Select* from Users;";
 
             ResultSet rs = st.executeQuery(sql);
@@ -56,7 +82,7 @@ public class Profile implements Initializable, ScreenInterface {
                 userName.setText(rs.getString("idUsers"));
                 firstName.setText(rs.getString("FirstName"));
                 lastName.setText(rs.getString("LastName"));
-                email.setText (rs.getString("Email"));
+                email.setText(rs.getString("Email"));
                 age.setText(rs.getString("Age"));
             }
         } catch (Exception ex) {

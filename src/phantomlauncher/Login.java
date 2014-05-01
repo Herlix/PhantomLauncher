@@ -24,7 +24,7 @@ import javafx.scene.text.*;
  */
 public class Login implements Initializable, ScreenInterface {
 
-    static Connection con = null;
+    static Connection uCon = null; // User-Connection
 
     @FXML
     private TextField idUser;
@@ -36,6 +36,8 @@ public class Login implements Initializable, ScreenInterface {
     private Button login;
     @FXML
     private Button signUp;
+    @FXML
+    private Button closeDown;
 
     private ScreenController screen;
 
@@ -81,9 +83,10 @@ public class Login implements Initializable, ScreenInterface {
         String driver = "com.mysql.jdbc.Driver";
         try {
             Class.forName(driver);
-            con = DriverManager.getConnection("jdbc:mysql://localhost:4321/" + "phantom", dbUser, dbPasswd);
+            uCon = DriverManager.getConnection("jdbc:mysql://localhost:4321/" + "phantom", dbUser, dbPasswd);
             error.setText("");
-            screen.setScreen("Profile"); // Switch screen
+            Profile.getInfo();
+            screen.setScreen("Profile");// Switch screen
         } catch (Exception e) {
             error.setText("Wrong Username or Password");
         }
@@ -106,5 +109,19 @@ public class Login implements Initializable, ScreenInterface {
         } catch (Exception e) {
             System.err.print(e);
         }
+    }
+
+    /**
+     * Terminate program.
+     */
+    public void closeDown(ActionEvent event) {
+        System.exit(0);
+    }
+
+    /**
+     * Minimize program.
+     */
+    public void minimize(ActionEvent event) {
+        ScreenController.stage.setIconified(true);
     }
 }

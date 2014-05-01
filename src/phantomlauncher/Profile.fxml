@@ -15,10 +15,25 @@
     <Text fx:id="lastName" layoutX="131.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastname" />
     <Text fx:id="email" layoutX="131.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
     <Text fx:id="age" layoutX="131.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age" />
-    <ImageView fitHeight="81.75" fitWidth="109.0" layoutX="22.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="profileImage" fitHeight="81.75" fitWidth="109.0" layoutX="22.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@../../Popeye.jpg" />
       </image>
     </ImageView>
+    <Button fx:id="closeDown" layoutX="564.0" layoutY="8.0" minHeight="15.9609375" minWidth="21.0" mnemonicParsing="false" onAction="#closeDown" prefHeight="22.0" prefWidth="22.0" text="X">
+      <font>
+        <Font size="9.0" />
+      </font>
+    </Button>
+    <Button fx:id="logout" layoutX="535.0" layoutY="34.0" mnemonicParsing="false" onAction="#logout" prefWidth="53.291015625" text="Logout">
+      <font>
+        <Font size="10.0" />
+      </font>
+    </Button>
+    <Button fx:id="minimize" layoutX="535.0" layoutY="8.0" minHeight="15.9609375" minWidth="21.0" mnemonicParsing="false" onAction="#minimize" prefHeight="22.0" prefWidth="22.0" text="-" textAlignment="CENTER">
+      <font>
+        <Font name="System Bold" size="10.0" />
+      </font>
+    </Button>
   </children>
 </AnchorPane>

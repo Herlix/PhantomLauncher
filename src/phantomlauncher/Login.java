@@ -41,11 +41,17 @@ public class Login implements Initializable, ScreenInterface {
 
     private ScreenController screen;
 
+    /**
+     * Tells the ScreenController that this is a screen.
+     */
     @Override
     public void ScreenHandler(ScreenController screen) {
         this.screen = screen;
     }
 
+    /**
+     * Standard initilize method for autorun at startup.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -112,9 +118,10 @@ public class Login implements Initializable, ScreenInterface {
     }
 
     /**
-     * Terminate program.
+     * Logout and Terminate program.
      */
-    public void closeDown(ActionEvent event) {
+    public void closeDown(ActionEvent event) throws SQLException {
+        uCon.close();
         System.exit(0);
     }
 

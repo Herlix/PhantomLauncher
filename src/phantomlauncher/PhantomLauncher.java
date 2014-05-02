@@ -17,10 +17,17 @@ import javafx.stage.StageStyle;
  */
 public class PhantomLauncher extends Application {
 
+    /**
+     * Standard main method. A backup method for starting with external 
+     * inputs at startup.
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Start method that prompts the stage to show.
+     */
     @Override
     public void start(Stage stage) throws Exception {
 

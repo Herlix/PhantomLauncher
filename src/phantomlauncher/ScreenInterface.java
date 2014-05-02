@@ -7,12 +7,12 @@ package phantomlauncher;
 
 /**
  *
- * @author Alexander
+ * @author Joakim & Alexander
  */
 public interface ScreenInterface {
-
-    // This method will be used to assign the handler to each "screen".
-    // The different "screens" (menu and program) will use the handler 
-    // when they want to change the "screen". // ett interface som ska köras för alla så att alla berättar vad dom är.
+    
+    /**
+     * Method that is used by all classes to tell if they are screens.
+     */
     void ScreenHandler(ScreenController screen);
 }

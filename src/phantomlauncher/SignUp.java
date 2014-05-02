@@ -49,6 +49,9 @@ public class SignUp implements Initializable, ScreenInterface {
 
     private ScreenController screen;
 
+    /**
+     * Tells the ScreenController that this is a screen.
+     */
     @Override
     public void ScreenHandler(ScreenController screen) {
         this.screen = screen;
@@ -58,7 +61,8 @@ public class SignUp implements Initializable, ScreenInterface {
      * Back to login.
      */
     @FXML
-    public void backToLogin(ActionEvent event) {
+    public void backToLogin(ActionEvent event) throws SQLException {
+        mCon.close();
         screen.setScreen("Login"); // Switch screen
     }
 
@@ -69,6 +73,9 @@ public class SignUp implements Initializable, ScreenInterface {
         ScreenController.stage.setIconified(true);
     }
 
+    /**
+     * Standard initilize method for autorun at startup.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {

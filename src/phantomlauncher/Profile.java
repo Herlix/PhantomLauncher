@@ -42,15 +42,24 @@ public class Profile implements Initializable, ScreenInterface {
 
     private ScreenController screen;
 
+    /**
+     * Tells the ScreenController that this is a screen.
+     */
     @Override
     public void ScreenHandler(ScreenController screen) {
         this.screen = screen;
     }
 
+    /**
+     * Standard initilize method for autorun at startup.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
 
+    /**
+     * Logout program.
+     */
     @FXML
     public void logout(ActionEvent event) throws SQLException {
         Login.uCon.close(); //Logout user
@@ -58,7 +67,7 @@ public class Profile implements Initializable, ScreenInterface {
     }
 
     /**
-     * Terminate program.
+     * Logout and Terminate program.
      */
     public void closeDown(ActionEvent event) throws SQLException {
         Login.uCon.close(); //Logout user

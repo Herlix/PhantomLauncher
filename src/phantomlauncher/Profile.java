@@ -49,7 +49,7 @@ public class Profile implements Initializable, ScreenInterface {
     }
 
     /**
-     * Standard initilize method for autorun at startup.
+     * Standard initialize method for autorun at startup.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -85,7 +85,7 @@ public class Profile implements Initializable, ScreenInterface {
     public static void getInfo() {
         try {
             Statement st = Login.uCon.createStatement();
-            String sql = "Select* from Users;";
+            String sql = "Select* from Users WHERE idUsers = '" + Login.idUser.getText() + "';";
 
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {

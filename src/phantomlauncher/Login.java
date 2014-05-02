@@ -27,7 +27,7 @@ public class Login implements Initializable, ScreenInterface {
     static Connection uCon = null; // User-Connection
 
     @FXML
-    private TextField idUser;
+    public static TextField idUser;
     @FXML
     private PasswordField passID;
     @FXML
@@ -50,7 +50,7 @@ public class Login implements Initializable, ScreenInterface {
     }
 
     /**
-     * Standard initilize method for autorun at startup.
+     * Standard initialize method for autorun at startup.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -130,4 +130,5 @@ public class Login implements Initializable, ScreenInterface {
     public void minimize(ActionEvent event) {
         ScreenController.stage.setIconified(true);
     }
+    
 }

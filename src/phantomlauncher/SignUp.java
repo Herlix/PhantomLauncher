@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.text.Text;
 
@@ -26,6 +27,7 @@ public class SignUp implements Initializable, ScreenInterface {
     private String email;
     private String driver = "com.mysql.jdbc.Driver";
     private Connection mCon; // Master-Connection
+    private Statement st;
 
     @FXML
     private TextField signUpUserName;
@@ -46,9 +48,13 @@ public class SignUp implements Initializable, ScreenInterface {
     @FXML
     private Button backToLogin;
     @FXML
-    private Text userError;
+    private Label userError;
     @FXML
-    private Text passError;
+    private Label passError1;
+    @FXML
+    private Label passError2;
+    @FXML
+    private Label ageError;
 
     private ScreenController screen;
 
@@ -76,7 +82,7 @@ public class SignUp implements Initializable, ScreenInterface {
     }
 
     /**
-     * Standard initilize method for autorun at startup.
+     * Standard initialize method for autorun at startup.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -89,19 +95,23 @@ public class SignUp implements Initializable, ScreenInterface {
     @FXML
     public void signUpAction(ActionEvent event) throws SQLException {
         try {
+            masterLogin();
+            st = mCon.createStatement();
             userName = signUpUserName.getText();
             password = signUpPassword.getText();
             firstName = signUpFirstName.getText();
             lastName = signUpLastName.getText();
-            age = Integer.parseInt(SignUpAge.getText());
+            try {
+                age = Integer.parseInt(SignUpAge.getText());
+            } catch (NumberFormatException ex) {
+                ageError.setText("Not a valid age!");
+            }
             email = SignUpEmail.getText();
             if (checkUserName(userName) && checkPassword(password) && firstName != null && lastName != null && age > 0 && checkEmail(email)) {
                 signUp();
-                Login.uCon.close(); // log out master
                 screen.setScreen("Login");
-            } else {
-               //
-            }
+            } 
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -125,11 +135,9 @@ public class SignUp implements Initializable, ScreenInterface {
      */
     public void signUp() {
         String mySqlInlog = "CREATE USER '" + userName + "'@'localhost' IDENTIFIED BY '" + password + "'";
-        String mySqlGrant = "GRANT SELECT,UPDATE ON phantom.* TO '" + userName + "'@'localhost';";
+        String mySqlGrant = "GRANT SELECT, UPDATE ON phantom.* TO '" + userName + "'@'localhost';";
         String addToDB = "INSERT INTO Users VALUES( '" + userName + "','" + firstName + "','" + lastName + "'," + age + ",'" + email + "');";
-        masterLogin();
-        try {
-            Statement st = mCon.createStatement();
+        try {      
             st.execute(mySqlInlog);
             st.execute(mySqlGrant);
             st.execute(addToDB);
@@ -153,10 +161,8 @@ public class SignUp implements Initializable, ScreenInterface {
      */
     private boolean checkUserName(String userName) {
         try {
-            masterLogin();
-            Statement st = mCon.createStatement();
-            String sql = "Select idUsers from Users;";
-            ResultSet rs = st.executeQuery(sql);
+            String getId = "Select idUsers from Users;";
+            ResultSet rs = st.executeQuery(getId);
             while (rs.next()) {
                 String id = rs.getString("idUsers");
                 if (id.equals(userName)) {
@@ -164,20 +170,24 @@ public class SignUp implements Initializable, ScreenInterface {
                     return false;
                 }
             } 
-            mCon.close();
-            return true;            
+                       
         } catch (SQLException ex) {
-            return false;
         }
+        return true; 
     }
 
     private boolean checkPassword(String password) {
         passwordConfirm = signUpConfirm.getText();
-
+        if (password.length() < 6) {
+            passError1.setText("Password to short!");
+            return false;
+        }
+        passError1.setText("");
         if (passwordConfirm.equals(password)) {
+            passError2.setText("");
             return true;
         } else {
-            passError.setText("password does not match!");
+            passError2.setText("Password does not match!");
             return false;
         }
     }

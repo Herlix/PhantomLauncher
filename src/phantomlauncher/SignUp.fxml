@@ -9,12 +9,6 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="phantomlauncher.SignUp">
   <children>
-    <Text fx:id="userError" fill="RED" layoutX="184.0" layoutY="89.0" scaleX="10000.0" scaleY="1.0" strikethrough="false" strokeType="OUTSIDE" strokeWidth="0.0" text="" textAlignment="LEFT" wrappingWidth="0.0">
-      <font>
-        <Font size="12.0" fx:id="x1" />
-      </font>
-    </Text>
-    <Text fill="RED" layoutX="184.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
     <Label layoutX="94.0" layoutY="57.0" text="Username:" />
     <Label layoutX="99.0" layoutY="100.0" text="Password:" />
     <Label layoutX="40.0" layoutY="145.0" text="Confirm password:" />
@@ -41,5 +35,9 @@
         <Font name="Times New Roman" size="9.0" />
       </font>
     </Button>
+    <Label fx:id="userError" layoutX="184.0" layoutY="77.0" text="" textFill="RED" />
+    <Label fx:id="passError1" layoutX="184.0" layoutY="123.0" text="" textFill="RED" />
+    <Label fx:id="passError2" layoutX="184.0" layoutY="167.0" text="" textFill="RED" />
+    <Label fx:id="ageError" layoutX="184.0" layoutY="291.0" text="" textFill="RED" />
   </children>
 </AnchorPane>

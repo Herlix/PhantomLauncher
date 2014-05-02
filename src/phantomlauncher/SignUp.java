@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -41,11 +42,13 @@ public class SignUp implements Initializable, ScreenInterface {
     @FXML
     private TextField SignUpEmail;
     @FXML
-    private Button checkButton;
-    @FXML
     private Button signUpButton;
     @FXML
     private Button backToLogin;
+    @FXML
+    private Text userError;
+    @FXML
+    private Text passError;
 
     private ScreenController screen;
 
@@ -62,8 +65,7 @@ public class SignUp implements Initializable, ScreenInterface {
      */
     @FXML
     public void backToLogin(ActionEvent event) throws SQLException {
-        mCon.close();
-        screen.setScreen("Login"); // Switch screen
+        screen.setScreen("Login"); // Switch screen        
     }
 
     /**
@@ -78,39 +80,6 @@ public class SignUp implements Initializable, ScreenInterface {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            Login.sshConnect();
-            System.out.println("Connected...");
-        } catch (Exception ex) {
-            System.out.println("Connection falied...");
-        }
-    }
-    /*
-     When you click the Check username button it will login with the Master user
-     and compare the entered username with all usernames in the db idUsers column
-     */
-
-    @FXML
-    public void checkAction(ActionEvent event) {
-        try {
-            masterLogin();
-            Statement st = mCon.createStatement();
-            String sql = "Select idUsers from Users;";
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                String id = rs.getString("idUsers");
-                String id2 = signUpUserName.getText();
-                if (id.equals(id2)) {
-                    System.out.println("Name taken");
-                } else {
-                    userName = signUpUserName.getText();
-                    System.out.println("You can use that name");
-                }
-            }
-            mCon.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
     }
 
     /**
@@ -119,18 +88,22 @@ public class SignUp implements Initializable, ScreenInterface {
      */
     @FXML
     public void signUpAction(ActionEvent event) throws SQLException {
-        password = signUpPassword.getText();
-        passwordConfirm = signUpConfirm.getText();
-        firstName = signUpFirstName.getText();
-        lastName = signUpLastName.getText();
-        age = Integer.parseInt(SignUpAge.getText());
-        email = SignUpEmail.getText();
-        if (userName != null && password.length() > 5 && password.equals(passwordConfirm) && firstName != null && lastName != null && age > 0 && email != null) {
-            signUp();
-            Login.uCon.close(); // log out master
-            screen.setScreen("Login");
-        } else {
-            System.out.println("Någonting gick fel! Antagligen glömde du trycka på check username");
+        try {
+            userName = signUpUserName.getText();
+            password = signUpPassword.getText();
+            firstName = signUpFirstName.getText();
+            lastName = signUpLastName.getText();
+            age = Integer.parseInt(SignUpAge.getText());
+            email = SignUpEmail.getText();
+            if (checkUserName(userName) && checkPassword(password) && firstName != null && lastName != null && age > 0 && checkEmail(email)) {
+                signUp();
+                Login.uCon.close(); // log out master
+                screen.setScreen("Login");
+            } else {
+               //
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -151,18 +124,61 @@ public class SignUp implements Initializable, ScreenInterface {
      * in the Users table of phantom db.
      */
     public void signUp() {
-        String mySqlInlog = "CREATE USER '" + userName + "'@'localhost' IDENTIFIED BY '" + password + "';";
-        String mySqlGrant = "GRANT SELECT ON phantom.* TO '" + userName + "'@'localhost';";
-        String addToDB = "INSERT INTO Users VALUES( '" + userName + "','" + password + "','" + firstName + "','" + lastName + "'," + age + ",'" + email + "');";
+        String mySqlInlog = "CREATE USER '" + userName + "'@'localhost' IDENTIFIED BY '" + password + "'";
+        String mySqlGrant = "GRANT SELECT,UPDATE ON phantom.* TO '" + userName + "'@'localhost';";
+        String addToDB = "INSERT INTO Users VALUES( '" + userName + "','" + firstName + "','" + lastName + "'," + age + ",'" + email + "');";
         masterLogin();
         try {
             Statement st = mCon.createStatement();
             st.execute(mySqlInlog);
             st.execute(mySqlGrant);
             st.execute(addToDB);
-
+            mCon.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public static boolean checkEmail(String email) {
+        for (int i = 0; i < email.length(); i++) {
+            if (email.charAt(i) == '@') {
+                return true;
+            }
+        }
+        return false;
+    }
+    /*
+     When you click the Check username button it will login with the Master user
+     and compare the entered username with all usernames in the db idUsers column
+     */
+    private boolean checkUserName(String userName) {
+        try {
+            masterLogin();
+            Statement st = mCon.createStatement();
+            String sql = "Select idUsers from Users;";
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String id = rs.getString("idUsers");
+                if (id.equals(userName)) {
+                    userError.setText("Name taken!");
+                    return false;
+                }
+            } 
+            mCon.close();
+            return true;            
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+
+    private boolean checkPassword(String password) {
+        passwordConfirm = signUpConfirm.getText();
+
+        if (passwordConfirm.equals(password)) {
+            return true;
+        } else {
+            passError.setText("password does not match!");
+            return false;
         }
     }
 }

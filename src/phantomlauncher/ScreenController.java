@@ -28,6 +28,7 @@ public class ScreenController extends StackPane {
 //       one "screen" in the stack (card in the card deck) is when we are
 //       switching to a new "screen". This is useful if we later on want to 
 //       add a nice transitioning between the two "sceens".
+    
     // This is needed to resize the window after changing the "screen"
     public static Stage stage;
 

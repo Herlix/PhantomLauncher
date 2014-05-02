@@ -7,6 +7,7 @@ package phantomlauncher;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -18,8 +19,8 @@ import javafx.stage.StageStyle;
 public class PhantomLauncher extends Application {
 
     /**
-     * Standard main method. A backup method for starting with external 
-     * inputs at startup.
+     * Standard main method. A backup method for starting with external inputs
+     * at startup.
      */
     public static void main(String[] args) {
         launch(args);
@@ -45,9 +46,9 @@ public class PhantomLauncher extends Application {
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initStyle(StageStyle.TRANSPARENT);
-        stage.show();
         stage.setTitle("Phantom Launcher");
         stage.setResizable(false);
+        stage.show();
 
     }
 }

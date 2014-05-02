@@ -14,9 +14,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -28,9 +28,7 @@ public class Profile implements Initializable, ScreenInterface {
     @FXML
     private static Text userName;
     @FXML
-    private static Text firstName;
-    @FXML
-    private static Text lastName;
+    private static Text fullName;
     @FXML
     private static Text age;
     @FXML
@@ -81,6 +79,9 @@ public class Profile implements Initializable, ScreenInterface {
         ScreenController.stage.setIconified(true);
     }
 
+    /**
+     * Used to get user info and diplay it.
+     */
     public static void getInfo() {
         try {
             Statement st = Login.uCon.createStatement();
@@ -89,12 +90,78 @@ public class Profile implements Initializable, ScreenInterface {
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 userName.setText(rs.getString("idUsers"));
-                firstName.setText(rs.getString("FirstName"));
-                lastName.setText(rs.getString("LastName"));
+                fullName.setText(rs.getString("FirstName") + " " + rs.getString("LastName"));
                 email.setText(rs.getString("Email"));
                 age.setText(rs.getString("Age"));
             }
         } catch (Exception ex) {
         }
+    }
+
+    /**
+     * Button event for changing password.
+     */
+    public void changePass(ActionEvent event) {
+        passwordChanger();
+    }
+
+    /**
+     * Used to change users password.
+     */
+    public void passwordChanger() {
+        try {
+            String password = JOptionPane.showInputDialog("Enter Password");
+            String passConfirm = JOptionPane.showInputDialog("Enter Password again");
+            if (password.length() > 5 && password.equals(passConfirm)) {
+                try {
+                    Statement st = Login.uCon.createStatement();
+                    String set = "SET password FOR '" + userName.getText() + "'@'localhost'=PASSWORD('" + password + "')";
+                    st.executeQuery(set);
+                    JOptionPane.showMessageDialog(null, "Your password has been changed!");
+                } catch (Exception ex) {
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid Entry");
+                passwordChanger();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Password Not Changed");
+        }
+    }
+
+    /**
+     * Button event for changing email.
+     */
+    public void changeEmail(ActionEvent event) {
+        changeEmailAdress();
+    }
+
+    /**
+     * Used to change users email.
+     */
+    public void changeEmailAdress() {
+        try {
+            String emailConfirm = "";
+            String emailChange = JOptionPane.showInputDialog("Enter Email");
+            if (SignUp.checkEmail(emailChange)) {
+                emailConfirm = JOptionPane.showInputDialog("Enter Email again");
+            }
+            if (emailChange.equals(emailConfirm)) {
+                try {
+                    Statement st = Login.uCon.createStatement();
+                    String set = "UPDATE phantom.Users SET Email = '" + emailChange + "' WHERE idUsers = '" + userName.getText() + "'";
+                    st.execute(set);
+                    JOptionPane.showMessageDialog(null, "Your email has been changed!");
+                    getInfo();
+                } catch (Exception ex) {
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid Entry");
+                changeEmailAdress();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Email Not Changed");
+        }
+
     }
 }

@@ -121,7 +121,6 @@ public class Login implements Initializable, ScreenInterface {
      * Logout and Terminate program.
      */
     public void closeDown(ActionEvent event) throws SQLException {
-        uCon.close();
         System.exit(0);
     }
 

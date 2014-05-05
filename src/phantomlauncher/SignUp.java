@@ -102,12 +102,13 @@ public class SignUp implements Initializable, ScreenInterface {
             firstName = signUpFirstName.getText();
             lastName = signUpLastName.getText();
             try {
+                ageError.setText("");
                 age = Integer.parseInt(SignUpAge.getText());
             } catch (NumberFormatException ex) {
                 ageError.setText("Not a valid age!");
             }
             email = SignUpEmail.getText();
-            if (checkUserName(userName) && checkPassword(password) && firstName != null && lastName != null && age > 0 && checkEmail(email)) {
+            if (checkUserName(userName) && checkPassword(password) && firstName != null && lastName != null && age > 0 && age < 120 && checkEmail(email)) {
                 signUp();
                 screen.setScreen("Login");
             } 
@@ -161,6 +162,7 @@ public class SignUp implements Initializable, ScreenInterface {
      */
     private boolean checkUserName(String userName) {
         try {
+            userError.setText("");
             String getId = "Select idUsers from Users;";
             ResultSet rs = st.executeQuery(getId);
             while (rs.next()) {

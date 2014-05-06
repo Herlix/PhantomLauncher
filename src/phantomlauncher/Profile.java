@@ -1,5 +1,9 @@
 package phantomlauncher;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,9 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 
 /**
  * FXML Controller class
@@ -33,7 +35,10 @@ public class Profile implements Initializable, ScreenInterface {
     @FXML
     private static ImageView profileImage;
     @FXML
+    private static ImageView boulderDash;
+    @FXML
     private Button loadInfo;
+    
 
     private ScreenController screen;
 
@@ -146,7 +151,7 @@ public class Profile implements Initializable, ScreenInterface {
             if (emailChange.equals(emailConfirm)) {
                 try {
                     Statement st = Login.uCon.createStatement();
-                    String set = "UPDATE phantom.Users SET Email = '" + emailChange + "' WHERE idUsers = '" + userName.getText() + "'";
+                    String set = "UPDATE phantom.Users SET email = '" + emailChange + "' WHERE idUsers = '" + userName.getText() + "'";
                     st.execute(set);
                     JOptionPane.showMessageDialog(null, "Your email has been changed!");
                     getInfo();
@@ -160,5 +165,17 @@ public class Profile implements Initializable, ScreenInterface {
             JOptionPane.showMessageDialog(null, "Email Not Changed");
         }
 
+    }
+    
+    public void launchBD() {
+        try {
+            File file = new File("phantom.txt");
+            OutputStream os = new FileOutputStream(file);
+            String login = Login.dbUser + "\n" + Login.dbPasswd;
+            os.write(login.getBytes());
+            os.close();
+        } catch (IOException ex) {
+            
+        }
     }
 }

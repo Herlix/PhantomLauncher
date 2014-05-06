@@ -149,8 +149,8 @@ public class SignUp implements Initializable, ScreenInterface {
      * in the Users table of phantom db.
      */
     public void signUp() {
-        String mySqlInlog = "CREATE USER '" + userName + "'@'localhost' IDENTIFIED BY '" + password + "'";
-        String mySqlGrant = "GRANT SELECT, UPDATE ON phantom.* TO '" + userName + "'@'localhost';";
+        String mySqlInlog = "CREATE USER '" + userName.toLowerCase() + "'@'localhost' IDENTIFIED BY '" + password + "'";
+        String mySqlGrant = "GRANT SELECT, UPDATE ON phantom.* TO '" + userName.toLowerCase() + "'@'localhost';";
         String addToDB = "INSERT INTO Users VALUES( '" + userName + "','" + firstName + "','" + lastName + "','" + age + "','" + email + "');";
         try {
             st.execute(mySqlInlog);
@@ -163,6 +163,7 @@ public class SignUp implements Initializable, ScreenInterface {
     }
 
     public static boolean checkEmail(String email) {
+        emailError.setText("");
         for (int i = 0; i < email.length(); i++) {
             if (email.charAt(i) == '@' && email.length() > 5) {
                 return true;

@@ -20,6 +20,8 @@ import javafx.scene.text.*;
 public class Login implements Initializable, ScreenInterface {
 
     static Connection uCon = null; // User-Connection
+    public static String dbPasswd;
+    public static String dbUser;
 
     @FXML
     public static TextField idUser;
@@ -78,8 +80,8 @@ public class Login implements Initializable, ScreenInterface {
      * This Method logs onto the server using info from the inputfields.
      */
     public void loginDB() {
-        String dbUser = idUser.getText();
-        String dbPasswd = passID.getText();
+        dbUser = idUser.getText().toLowerCase();
+        dbPasswd = passID.getText();
 
         String driver = "com.mysql.jdbc.Driver";
         try {

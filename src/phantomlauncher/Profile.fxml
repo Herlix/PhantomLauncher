@@ -4,32 +4,50 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="phantomlauncher.Profile">
   <children>
-    <Text fx:id="userName" layoutX="131.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+    <ImageView id="test.jpg" layoutX="0.0" layoutY="0.0">
+      <image>
+        <Image url="@test.jpg" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <Text fx:id="userName" fill="BLACK" layoutX="131.0" layoutY="30.0" scaleX="1.0" scaleY="0.9999937347040251" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
     <Text fx:id="fullName" layoutX="131.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
     <Text fx:id="email" layoutX="131.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
     <Text fx:id="age" layoutX="131.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age" />
     <ImageView fx:id="profileImage" fitHeight="81.75" fitWidth="109.0" layoutX="22.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <effect>
+        <DropShadow height="17.0" radius="8.0" width="17.0" />
+      </effect>
       <image>
         <Image url="@Popeye.jpg" />
       </image>
     </ImageView>
     <Button fx:id="closeDown" layoutX="564.0" layoutY="8.0" minHeight="15.9609375" minWidth="21.0" mnemonicParsing="false" onAction="#closeDown" prefHeight="22.0" prefWidth="22.0" text="X">
+      <effect>
+        <DropShadow height="17.0" radius="8.0" width="17.0" />
+      </effect>
       <font>
         <Font size="9.0" />
       </font>
     </Button>
     <Button fx:id="logout" layoutX="535.0" layoutY="34.0" mnemonicParsing="false" onAction="#logout" prefWidth="53.291015625" text="Logout">
+      <effect>
+        <DropShadow height="17.0" radius="8.0" width="17.0" />
+      </effect>
       <font>
         <Font size="10.0" />
       </font>
     </Button>
     <Button fx:id="minimize" layoutX="535.0" layoutY="8.0" minHeight="15.9609375" minWidth="21.0" mnemonicParsing="false" onAction="#minimize" prefHeight="22.0" prefWidth="22.0" text="-" textAlignment="CENTER">
+      <effect>
+        <DropShadow height="17.0" radius="8.0" width="17.0" />
+      </effect>
       <font>
         <Font name="System Bold" size="10.0" />
       </font>
@@ -40,10 +58,17 @@
     <Separator layoutX="131.0" layoutY="78.0" prefWidth="150.0" />
     <Separator layoutX="22.0" layoutY="96.0" prefWidth="259.0" />
     <Button fx:id="editEmail" layoutX="131.0" layoutY="79.0" mnemonicParsing="false" onAction="#changeEmail" text="Edit Email">
+      <effect>
+        <DropShadow height="17.0" radius="8.0" width="17.0" />
+      </effect>
       <font>
         <Font name="Times New Roman" size="10.0" fx:id="x1" />
       </font>
     </Button>
-    <Button fx:id="editPassword" font="$x1" layoutX="199.0" layoutY="78.0" mnemonicParsing="false" onAction="#changePass" text="Edit Password" />
+    <Button fx:id="editPassword" font="$x1" layoutX="199.0" layoutY="78.0" mnemonicParsing="false" onAction="#changePass" text="Edit Password">
+      <effect>
+        <DropShadow height="17.0" radius="8.0" width="17.0" />
+      </effect>
+    </Button>
   </children>
 </AnchorPane>

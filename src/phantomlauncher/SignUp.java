@@ -46,7 +46,7 @@ public class SignUp implements Initializable, ScreenInterface {
     @FXML
     private Button signUpButton;
     @FXML
-    private Button backToLogin;
+    private Button closeDown;
     @FXML
     private Label userError;
     @FXML
@@ -55,7 +55,9 @@ public class SignUp implements Initializable, ScreenInterface {
     private Label passError2;
     @FXML
     private Label ageError;
-
+    @FXML
+    private static Label emailError;
+    
     private ScreenController screen;
 
     /**
@@ -67,11 +69,24 @@ public class SignUp implements Initializable, ScreenInterface {
     }
 
     /**
+     * Terminate Program.
+     */
+    @FXML
+    public void closeDown(ActionEvent event) throws SQLException {
+        try {
+            mCon.close();
+        } catch (Exception e) {
+        }
+        
+        System.exit(0);
+    }
+
+    /**
      * Back to login.
      */
     @FXML
-    public void backToLogin(ActionEvent event) throws SQLException {
-        screen.setScreen("Login"); // Switch screen        
+    public void backToLogin(ActionEvent event) {
+        screen.setScreen("Login");
     }
 
     /**
@@ -108,11 +123,11 @@ public class SignUp implements Initializable, ScreenInterface {
                 ageError.setText("Not a valid age!");
             }
             email = SignUpEmail.getText();
-            if (checkUserName(userName) && checkPassword(password) && firstName != null && lastName != null && age > 0 && age < 120 && checkEmail(email)) {
+            if (checkUserName(userName) && checkPassword(password) && firstName != null && lastName != null && age > 11 && age < 120 && checkEmail(email)) {
                 signUp();
                 screen.setScreen("Login");
-            } 
-            
+            }
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -138,7 +153,7 @@ public class SignUp implements Initializable, ScreenInterface {
         String mySqlInlog = "CREATE USER '" + userName + "'@'localhost' IDENTIFIED BY '" + password + "'";
         String mySqlGrant = "GRANT SELECT, UPDATE ON phantom.* TO '" + userName + "'@'localhost';";
         String addToDB = "INSERT INTO Users VALUES( '" + userName + "','" + firstName + "','" + lastName + "'," + age + ",'" + email + "');";
-        try {      
+        try {
             st.execute(mySqlInlog);
             st.execute(mySqlGrant);
             st.execute(addToDB);
@@ -150,16 +165,19 @@ public class SignUp implements Initializable, ScreenInterface {
 
     public static boolean checkEmail(String email) {
         for (int i = 0; i < email.length(); i++) {
-            if (email.charAt(i) == '@') {
+            if (email.charAt(i) == '@' && email.length()>5) {
                 return true;
             }
         }
+        emailError.setText("Invalid Entry");
         return false;
     }
+
     /*
      When you click the Check username button it will login with the Master user
      and compare the entered username with all usernames in the db idUsers column
      */
+
     private boolean checkUserName(String userName) {
         try {
             userError.setText("");
@@ -171,11 +189,11 @@ public class SignUp implements Initializable, ScreenInterface {
                     userError.setText("Name taken!");
                     return false;
                 }
-            } 
-                       
+            }
+
         } catch (SQLException ex) {
         }
-        return true; 
+        return true;
     }
 
     private boolean checkPassword(String password) {

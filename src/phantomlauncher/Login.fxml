@@ -16,9 +16,9 @@
         <Image url="@test.jpg" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
-    <Label layoutX="187.0" layoutY="92.0" text="Password:" textFill="WHITE">
+    <Label layoutX="187.0" layoutY="101.0" text="Password:" textFill="WHITE">
       <labelFor>
-        <PasswordField id="" fx:id="passID" alignment="CENTER" layoutX="187.0" layoutY="107.0" prefHeight="32.0" prefWidth="220.0" promptText="Password" text="" />
+        <PasswordField id="" fx:id="passID" alignment="CENTER" layoutX="187.0" layoutY="117.0" prefHeight="32.0" prefWidth="220.0" promptText="Password" text="" />
       </labelFor>
     </Label>
     <Label layoutX="187.0" layoutY="44.0" text="Username:" textFill="WHITE">
@@ -33,12 +33,12 @@
     </Text>
     <fx:reference source="idUser" />
     <fx:reference source="passID" />
-    <Button fx:id="login" layoutX="357.0" layoutY="148.0" onAction="#loginAction" text="Login">
+    <Button fx:id="login" layoutX="357.0" layoutY="159.0" onAction="#loginAction" text="Login">
       <effect>
         <DropShadow height="17.0" radius="8.0" width="17.0" />
       </effect>
     </Button>
-    <Button fx:id="signUp" layoutX="187.0" layoutY="148.0" mnemonicParsing="false" onAction="#signUpAction" text="Signup">
+    <Button fx:id="signUp" layoutX="187.0" layoutY="159.0" mnemonicParsing="false" onAction="#signUpAction" text="Signup">
       <effect>
         <DropShadow height="17.0" radius="8.0" width="17.0" />
       </effect>

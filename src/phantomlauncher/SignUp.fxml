@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
@@ -23,15 +24,14 @@
     <Label layoutX="93.0" layoutY="230.0" text="Last name:" textFill="WHITE" />
     <Label layoutX="134.0" layoutY="276.0" text="Age:" textFill="WHITE" />
     <Label layoutX="119.0" layoutY="317.0" text="E-mail:" textFill="WHITE" />
-    <Label layoutX="407.0" layoutY="91.0" prefHeight="65.0" prefWidth="124.0" text="Password mst be a minimum of 6 characters" textAlignment="LEFT" textFill="WHITE" wrapText="true" />
+    <Label layoutX="407.0" layoutY="91.0" prefHeight="54.0" prefWidth="128.0" text="Password mst be a minimum of 6 characters" textAlignment="LEFT" textFill="WHITE" wrapText="true" />
     <TextField fx:id="signUpUserName" layoutX="183.0" layoutY="54.0" prefWidth="200.0" promptText="Username" text="" />
     <PasswordField fx:id="signUpPassword" layoutX="183.0" layoutY="100.0" prefWidth="200.0" promptText="Password" />
     <PasswordField fx:id="signUpConfirm" layoutX="183.0" layoutY="145.0" prefWidth="200.0" promptText="Confirm Password" />
     <TextField fx:id="signUpFirstName" layoutX="183.0" layoutY="187.0" prefWidth="200.0" promptText="First Name" text="" />
     <TextField fx:id="signUpLastName" layoutX="183.0" layoutY="227.0" prefWidth="200.0" promptText="Last Name" text="" />
-    <TextField id="signUpAge" fx:id="SignUpAge" layoutX="184.0" layoutY="270.0" prefWidth="200.0" promptText="Age (xxxx-xx-xx)" text="" />
     <TextField id="signUpEmail" fx:id="SignUpEmail" layoutX="184.0" layoutY="311.0" prefWidth="200.0" promptText="Email Adress" text="" />
-    <Button id="signUpbutton" fx:id="signUpButton" layoutX="456.0" layoutY="269.0" mnemonicParsing="false" onAction="#signUpAction" text="Sign up">
+    <Button id="signUpbutton" fx:id="signUpButton" layoutX="505.0" layoutY="341.0" mnemonicParsing="false" onAction="#signUpAction" text="Sign up">
       <effect>
         <DropShadow height="17.0" radius="8.0" width="17.0" />
       </effect>
@@ -52,15 +52,99 @@
         <Font name="Times New Roman" size="9.0" />
       </font>
     </Button>
-    <Label fx:id="userError" layoutX="184.0" layoutY="77.0" text="" textFill="RED" />
-    <Label fx:id="passError1" layoutX="184.0" layoutY="123.0" text="" textFill="RED" />
-    <Label fx:id="passError2" layoutX="184.0" layoutY="167.0" text="" textFill="RED" />
-    <Label fx:id="ageError" layoutX="184.0" layoutY="291.0" text="" textFill="RED" />
-    <Button fx:id="backToLogin" layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#backToLogin" text="Back">
+    <Button fx:id="backToLogin" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#backToLogin" text="Back">
       <effect>
         <DropShadow height="17.0" radius="8.0" width="17.0" />
       </effect>
     </Button>
+    <Label fx:id="userError" layoutX="184.0" layoutY="77.0" text="" textFill="RED" />
+    <Label fx:id="passError1" layoutX="184.0" layoutY="123.0" text="" textFill="RED" />
+    <Label fx:id="passError2" layoutX="184.0" layoutY="167.0" text="" textFill="RED" />
+    <Label fx:id="ageError" layoutX="184.0" layoutY="291.0" text="" textFill="RED" />
     <Label fx:id="emailError" layoutX="184.0" layoutY="333.0" text="" textFill="RED" />
+    <ChoiceBox fx:id="yearAge" layoutX="184.0" layoutY="272.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="1980" />
+          <String fx:value="1981" />
+          <String fx:value="1982" />
+          <String fx:value="1983" />
+          <String fx:value="1984" />
+          <String fx:value="1985" />
+          <String fx:value="1986" />
+          <String fx:value="1987" />
+          <String fx:value="1988" />
+          <String fx:value="1989" />
+          <String fx:value="1990" />
+          <String fx:value="1991" />
+          <String fx:value="1992" />
+          <String fx:value="1993" />
+          <String fx:value="1994" />
+          <String fx:value="1995" />
+          <String fx:value="1996" />
+          <String fx:value="1997" />
+          <String fx:value="1998" />
+          <String fx:value="1999" />
+          <String fx:value="2000" />
+          <String fx:value="2001" />
+          <String fx:value="2002" />
+        </FXCollections>
+      </items>
+    </ChoiceBox>
+    <ChoiceBox fx:id="monthAge" layoutX="264.0" layoutY="272.0" prefWidth="52.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Jan" />
+          <String fx:value="Feb" />
+          <String fx:value="Mar" />
+          <String fx:value="Apr" />
+          <String fx:value="May" />
+          <String fx:value="Jun" />
+          <String fx:value="Jul" />
+          <String fx:value="Aug" />
+          <String fx:value="Sep" />
+          <String fx:value="Oct" />
+          <String fx:value="Nov" />
+          <String fx:value="Dec" />
+        </FXCollections>
+      </items>
+    </ChoiceBox>
+    <ChoiceBox fx:id="dayAge" layoutX="338.0" layoutY="271.0" prefWidth="45.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="01" />
+          <String fx:value="02" />
+          <String fx:value="03" />
+          <String fx:value="04" />
+          <String fx:value="05" />
+          <String fx:value="06" />
+          <String fx:value="07" />
+          <String fx:value="08" />
+          <String fx:value="09" />
+          <String fx:value="10" />
+          <String fx:value="11" />
+          <String fx:value="12" />
+          <String fx:value="13" />
+          <String fx:value="14" />
+          <String fx:value="15" />
+          <String fx:value="16" />
+          <String fx:value="17" />
+          <String fx:value="18" />
+          <String fx:value="19" />
+          <String fx:value="20" />
+          <String fx:value="21" />
+          <String fx:value="22" />
+          <String fx:value="23" />
+          <String fx:value="24" />
+          <String fx:value="25" />
+          <String fx:value="26" />
+          <String fx:value="27" />
+          <String fx:value="28" />
+          <String fx:value="29" />
+          <String fx:value="30" />
+          <String fx:value="31" />
+        </FXCollections>
+      </items>
+    </ChoiceBox>
   </children>
 </AnchorPane>

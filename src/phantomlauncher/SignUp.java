@@ -8,9 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.text.Text;
 
 /**
  *
@@ -23,7 +23,7 @@ public class SignUp implements Initializable, ScreenInterface {
     private String passwordConfirm;
     private String firstName;
     private String lastName;
-    private int age = 0;
+    private String age;
     private String email;
     private String driver = "com.mysql.jdbc.Driver";
     private Connection mCon; // Master-Connection
@@ -40,7 +40,11 @@ public class SignUp implements Initializable, ScreenInterface {
     @FXML
     private TextField signUpLastName;
     @FXML
-    private TextField SignUpAge;
+    private ChoiceBox yearAge;
+    @FXML
+    private ChoiceBox monthAge;
+    @FXML
+    private ChoiceBox dayAge;
     @FXML
     private TextField SignUpEmail;
     @FXML
@@ -57,7 +61,7 @@ public class SignUp implements Initializable, ScreenInterface {
     private Label ageError;
     @FXML
     private static Label emailError;
-    
+
     private ScreenController screen;
 
     /**
@@ -77,7 +81,7 @@ public class SignUp implements Initializable, ScreenInterface {
             mCon.close();
         } catch (Exception e) {
         }
-        
+
         System.exit(0);
     }
 
@@ -116,14 +120,9 @@ public class SignUp implements Initializable, ScreenInterface {
             password = signUpPassword.getText();
             firstName = signUpFirstName.getText();
             lastName = signUpLastName.getText();
-            try {
-                ageError.setText("");
-                age = Integer.parseInt(SignUpAge.getText());
-            } catch (NumberFormatException ex) {
-                ageError.setText("Not a valid age!");
-            }
+            age = (String)yearAge.getSelectionModel().getSelectedItem() +" - "+(String)monthAge.getSelectionModel().getSelectedItem()+" - "+(String)dayAge.getSelectionModel().getSelectedItem() ;
             email = SignUpEmail.getText();
-            if (checkUserName(userName) && checkPassword(password) && firstName != null && lastName != null && age > 11 && age < 120 && checkEmail(email)) {
+            if (checkUserName(userName) && checkPassword(password) && firstName != null && lastName != null && checkEmail(email)) {
                 signUp();
                 screen.setScreen("Login");
             }
@@ -152,7 +151,7 @@ public class SignUp implements Initializable, ScreenInterface {
     public void signUp() {
         String mySqlInlog = "CREATE USER '" + userName + "'@'localhost' IDENTIFIED BY '" + password + "'";
         String mySqlGrant = "GRANT SELECT, UPDATE ON phantom.* TO '" + userName + "'@'localhost';";
-        String addToDB = "INSERT INTO Users VALUES( '" + userName + "','" + firstName + "','" + lastName + "'," + age + ",'" + email + "');";
+        String addToDB = "INSERT INTO Users VALUES( '" + userName + "','" + firstName + "','" + lastName + "','" + age + "','" + email + "');";
         try {
             st.execute(mySqlInlog);
             st.execute(mySqlGrant);
@@ -165,7 +164,7 @@ public class SignUp implements Initializable, ScreenInterface {
 
     public static boolean checkEmail(String email) {
         for (int i = 0; i < email.length(); i++) {
-            if (email.charAt(i) == '@' && email.length()>5) {
+            if (email.charAt(i) == '@' && email.length() > 5) {
                 return true;
             }
         }
@@ -177,7 +176,6 @@ public class SignUp implements Initializable, ScreenInterface {
      When you click the Check username button it will login with the Master user
      and compare the entered username with all usernames in the db idUsers column
      */
-
     private boolean checkUserName(String userName) {
         try {
             userError.setText("");

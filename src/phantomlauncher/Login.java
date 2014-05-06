@@ -125,5 +125,5 @@ public class Login implements Initializable, ScreenInterface {
     public void minimize(ActionEvent event) {
         ScreenController.stage.setIconified(true);
     }
-    
+
 }

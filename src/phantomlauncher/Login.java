@@ -82,10 +82,8 @@ public class Login implements Initializable, ScreenInterface {
     public void loginDB() {
         dbUser = idUser.getText().toLowerCase();
         dbPasswd = passID.getText();
-
-        String driver = "com.mysql.jdbc.Driver";
         try {
-            Class.forName(driver);
+            Class.forName("com.mysql.jdbc.Driver");
             uCon = DriverManager.getConnection("jdbc:mysql://localhost:4321/" + "phantom", dbUser, dbPasswd);
             error.setText("");
             Profile.getInfo();

@@ -13,7 +13,7 @@
   <children>
     <ImageView id="test.jpg" layoutX="0.0" layoutY="0.0">
       <image>
-        <Image url="@test.jpg" preserveRatio="true" smooth="true" />
+        <Image url="@Images/Background.jpg" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
     <Label layoutX="187.0" layoutY="101.0" text="Password:" textFill="WHITE">

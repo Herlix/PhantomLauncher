@@ -11,9 +11,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="phantomlauncher.Profile">
   <children>
-    <ImageView id="test.jpg" layoutX="0.0" layoutY="0.0">
+    <ImageView id="test.jpg" fx:id="BmiCalculator" layoutX="0.0" layoutY="0.0">
       <image>
-        <Image url="@test.jpg" preserveRatio="true" smooth="true" />
+        <Image url="@Images/Background.jpg" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
     <Text fx:id="userName" fill="BLACK" layoutX="131.0" layoutY="30.0" scaleX="1.0" scaleY="0.9999937347040251" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
@@ -25,7 +25,7 @@
         <DropShadow height="17.0" radius="8.0" width="17.0" />
       </effect>
       <image>
-        <Image url="@Popeye.jpg" />
+        <Image url="@Images/Popeye.jpg" />
       </image>
     </ImageView>
     <Button fx:id="closeDown" layoutX="564.0" layoutY="8.0" minHeight="15.9609375" minWidth="21.0" mnemonicParsing="false" onAction="#closeDown" prefHeight="22.0" prefWidth="22.0" text="X">
@@ -70,10 +70,23 @@
         <DropShadow height="17.0" radius="8.0" width="17.0" />
       </effect>
     </Button>
-    <ImageView fx:id="boulderDash" fitHeight="134.67999328962088" fitWidth="259.0" layoutX="22.0" layoutY="200.0" onMouseClicked="#launchBD" pickOnBounds="true" preserveRatio="true">
-      <image>
-        <Image url="@StartScreen.png" />
-      </image>
-    </ImageView>
+    <TitledPane animated="false" collapsible="false" layoutX="14.0" layoutY="136.0" prefWidth="572.0" text="Your Apps" textAlignment="LEFT">
+      <content>
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <children>
+            <ImageView fx:id="boulderDash" fitHeight="39.24485134080034" fitWidth="245.0" layoutX="0.0" layoutY="0.0" onMouseClicked="#boulderDash" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@Images/BoulderDash.png" />
+              </image>
+            </ImageView>
+            <ImageView fitHeight="39.2448616027832" fitWidth="201.0102720894703" layoutX="0.0" layoutY="39.0" onMouseClicked="#BMICalculator" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@Images/BmiCalculator.PNG" />
+              </image>
+            </ImageView>
+          </children>
+        </AnchorPane>
+      </content>
+    </TitledPane>
   </children>
 </AnchorPane>

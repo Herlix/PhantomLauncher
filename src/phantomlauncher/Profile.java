@@ -1,6 +1,9 @@
 package phantomlauncher;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,8 +37,9 @@ public class Profile implements Initializable, ScreenInterface {
     @FXML
     private static ImageView boulderDash;
     @FXML
+    private static ImageView BmiCalculator;
+    @FXML
     private Button loadInfo;
-    
 
     private ScreenController screen;
 
@@ -140,12 +144,9 @@ public class Profile implements Initializable, ScreenInterface {
      */
     public void changeEmailAdress() {
         try {
-            String emailConfirm = "";
             String emailChange = JOptionPane.showInputDialog("Enter Email");
-            if (SignUp.checkEmail(emailChange)) {
-                emailConfirm = JOptionPane.showInputDialog("Enter Email again");
-            }
-            if (emailChange.equals(emailConfirm)) {
+            String emailConfirm = JOptionPane.showInputDialog("Enter Email again");
+            if (SignUp.checkEmail(emailChange, emailConfirm)) {
                 try {
                     Statement st = Login.uCon.createStatement();
                     String set = "UPDATE phantom.Users SET email = '" + emailChange + "' WHERE idUsers = '" + userName.getText() + "'";
@@ -155,7 +156,7 @@ public class Profile implements Initializable, ScreenInterface {
                 } catch (Exception ex) {
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Invalid Entry");
+                JOptionPane.showMessageDialog(null, "Invalid entry or input did not match");
                 changeEmailAdress();
             }
         } catch (Exception ex) {
@@ -163,15 +164,8 @@ public class Profile implements Initializable, ScreenInterface {
         }
 
     }
-    
-    public void launchBD() {
-        try {
-            String filePath = "C:/Users/Joakim/Desktop/NumberApp/NumberApp.jar";
-            Runtime.getRuntime().exec("java -jar " + filePath + " " + Login.dbUser + " " + Login.dbPasswd);
-            } catch (IOException ex) {
-                System.out.println("Något gick fel");
-        }
-        /**
+
+    public void boulderDash() {
         try {
             File file = new File("phantom.txt");
             OutputStream os = new FileOutputStream(file);
@@ -179,7 +173,16 @@ public class Profile implements Initializable, ScreenInterface {
             os.write(login.getBytes());
             os.close();
         } catch (IOException ex) {
-            
+
         }
-    */}
+    }
+
+    public void BMICalculator() {
+        try {
+            String filePath = "BmiClaculator.jar";
+            Runtime.getRuntime().exec("java -jar " + filePath + " " + Login.dbUser + " " + Login.dbPasswd);
+        } catch (IOException ex) {
+            System.out.println("Något gick fel");
+        }
+    }
 }

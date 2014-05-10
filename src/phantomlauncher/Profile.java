@@ -1,9 +1,6 @@
 package phantomlauncher;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -169,6 +166,13 @@ public class Profile implements Initializable, ScreenInterface {
     
     public void launchBD() {
         try {
+            String filePath = "C:/Users/Joakim/Desktop/NumberApp/NumberApp.jar";
+            Runtime.getRuntime().exec("java -jar " + filePath + " " + Login.dbUser + " " + Login.dbPasswd);
+            } catch (IOException ex) {
+                System.out.println("Något gick fel");
+        }
+        /**
+        try {
             File file = new File("phantom.txt");
             OutputStream os = new FileOutputStream(file);
             String login = Login.dbUser + "\n" + Login.dbPasswd;
@@ -177,5 +181,5 @@ public class Profile implements Initializable, ScreenInterface {
         } catch (IOException ex) {
             
         }
-    }
+    */}
 }

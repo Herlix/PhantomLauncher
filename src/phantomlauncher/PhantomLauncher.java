@@ -3,6 +3,7 @@ package phantomlauncher;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -34,7 +35,7 @@ public class PhantomLauncher extends Application {
         handler.loadScreen("SignUp", "SignUp.fxml");
         handler.loadScreen("Profile", "Profile.fxml");
         handler.setScreen("Login"); // Start with this screen.        
-        Scene scene = new Scene(handler);
+        Scene scene = new Scene(handler);        
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initStyle(StageStyle.TRANSPARENT);

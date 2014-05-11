@@ -51,7 +51,7 @@ public class SignUp implements Initializable, ScreenInterface {
     @FXML
     private TextField SignUpEmail;
     @FXML
-    private static TextField SignUpEmailConfirm;
+    private TextField SignUpEmailConfirm;
     @FXML
     private Button signUpButton;
     @FXML

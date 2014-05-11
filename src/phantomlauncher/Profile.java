@@ -13,9 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javax.swing.JOptionPane;
+import org.apache.commons.io.FileUtils;
 
 /**
  * FXML Controller class
@@ -184,5 +188,27 @@ public class Profile implements Initializable, ScreenInterface {
         } catch (IOException ex) {
             System.out.println("Något gick fel");
         }
+    }
+
+    public void changeImage() {
+        try {
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choose Image");
+            fileChooser.getExtensionFilters().addAll(
+                    new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"),
+                    new ExtensionFilter("All Files", "*.*"));
+            File selectedFile = fileChooser.showOpenDialog(ScreenController.stage);
+            if (selectedFile != null) {
+                File file = selectedFile;
+                File desc = new File("/" + file.getName());
+                FileUtils.copyFile(file, desc);
+                Image img = new Image(desc.toURI().toURL().toExternalForm());
+                profileImage.setImage(img);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
     }
 }

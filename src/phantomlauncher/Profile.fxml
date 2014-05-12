@@ -79,9 +79,14 @@
                 <Image url="@Images/BoulderDash.png" />
               </image>
             </ImageView>
-            <ImageView fitHeight="39.2448616027832" fitWidth="201.0102720894703" layoutX="0.0" layoutY="39.0" onMouseClicked="#BMICalculator" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="39.24485397338867" fitWidth="244.99998474121094" layoutX="0.0" layoutY="39.0" onMouseClicked="#BMICalculator" pickOnBounds="true" preserveRatio="false">
               <image>
                 <Image url="@Images/BmiCalculator.PNG" />
+              </image>
+            </ImageView>
+            <ImageView fitHeight="39.24488067626953" fitWidth="245.0" layoutX="0.0" layoutY="78.0" onMouseClicked="#NumberApp" pickOnBounds="true" preserveRatio="false">
+              <image>
+                <Image url="@Images/Numbers.png" />
               </image>
             </ImageView>
           </children>

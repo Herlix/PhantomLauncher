@@ -191,7 +191,7 @@ public class SignUp implements Initializable, ScreenInterface {
      */
     public void signUp() {
         String mySqlInlog = "CREATE USER '" + userName.toLowerCase() + "'@'localhost' IDENTIFIED BY '" + password + "'";
-        String mySqlGrant = "GRANT SELECT, UPDATE, INSERT ON phantom.* TO '" + userName.toLowerCase() + "'@'localhost';";
+        String mySqlGrant = "GRANT SELECT, UPDATE, INSERT, DELETE ON phantom.* TO '" + userName.toLowerCase() + "'@'localhost';";
         String addToDB = "INSERT INTO Users VALUES( '" + userName + "','" + firstName + "','" + lastName + "','" + age + "','" + email + "');";
         try {
             st.execute(mySqlInlog);

@@ -189,6 +189,15 @@ public class Profile implements Initializable, ScreenInterface {
             System.out.println("Något gick fel");
         }
     }
+    
+    public void NumberApp() {
+        try {
+            Runtime.getRuntime().exec("java -jar NumberApp.jar " + Login.dbUser + " " + Login.dbPasswd);
+            System.exit(0);
+        } catch (IOException ex) {
+            System.out.println("Något gick fel i NumberApp metoden!");
+        }
+    }
 
     public void changeImage() {
         try {

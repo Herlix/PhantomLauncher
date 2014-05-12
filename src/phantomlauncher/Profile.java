@@ -204,8 +204,8 @@ public class Profile implements Initializable, ScreenInterface {
                     new ExtensionFilter("All Files", "*.*"));
             File selectedFile = fileChooser.showOpenDialog(ScreenController.stage);
             if (selectedFile != null) {
-                File file = selectedFile;
-                File desc = new File("." + file.getName());
+                File file = selectedFile;               
+                File desc = new File((new File("")).getParentFile() + file.getName());
                 FileUtils.copyFile(file, desc);
                 Image img = new Image(desc.toURI().toURL().toExternalForm());
                 st.execute("UPDATE phantom.Users SET image = '" + desc.toURI().toURL().toExternalForm() + "' WHERE idUsers = '" + Login.dbUser + "';");

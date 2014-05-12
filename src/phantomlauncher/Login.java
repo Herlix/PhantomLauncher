@@ -87,6 +87,7 @@ public class Login implements Initializable, ScreenInterface {
             uCon = DriverManager.getConnection("jdbc:mysql://localhost:4321/" + "phantom", dbUser, dbPasswd);
             error.setText("");
             Profile.getInfo();
+            Profile.updateProgramList();
             screen.setScreen("Profile");// Switch screen
         } catch (Exception e) {
             error.setText("Wrong Username or Password");

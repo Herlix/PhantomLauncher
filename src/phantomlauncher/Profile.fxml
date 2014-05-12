@@ -16,11 +16,7 @@
         <Image url="@Images/Background.jpg" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
-    <Text fx:id="userName" fill="BLACK" layoutX="120.0" layoutY="29.0" scaleX="1.0" scaleY="0.9999937347040251" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
-    <Text fx:id="fullName" layoutX="120.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-    <Text fx:id="email" layoutX="120.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-    <Text fx:id="age" layoutX="120.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age" />
-    <ImageView fx:id="profileImage" fitHeight="81.75" fitWidth="109.0" layoutX="22.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="profileImage" fitHeight="85.0" fitWidth="100.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
       <effect>
         <DropShadow height="17.0" radius="8.0" width="17.0" />
       </effect>
@@ -28,6 +24,10 @@
         <Image url="@Images/Popeye.jpg" />
       </image>
     </ImageView>
+    <Text fx:id="userName" fill="BLACK" layoutX="120.0" layoutY="29.0" scaleX="1.0" scaleY="0.9999937347040251" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+    <Text fx:id="fullName" layoutX="120.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+    <Text fx:id="email" layoutX="120.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+    <Text fx:id="age" layoutX="120.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age" />
     <Button fx:id="closeDown" layoutX="564.0" layoutY="8.0" minHeight="15.9609375" minWidth="21.0" mnemonicParsing="false" onAction="#closeDown" prefHeight="22.0" prefWidth="22.0" text="X">
       <effect>
         <DropShadow height="17.0" radius="8.0" width="17.0" />
@@ -70,33 +70,17 @@
         <DropShadow height="17.0" radius="8.0" width="17.0" />
       </effect>
     </Button>
-    <TitledPane animated="false" collapsible="false" layoutX="14.0" layoutY="136.0" prefWidth="572.0" text="Your Apps" textAlignment="LEFT">
-      <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-          <children>
-            <ImageView fx:id="boulderDash" fitHeight="39.24485134080034" fitWidth="245.0" layoutX="0.0" layoutY="0.0" onMouseClicked="#boulderDash" pickOnBounds="true" preserveRatio="true">
-              <image>
-                <Image url="@Images/BoulderDash.png" />
-              </image>
-            </ImageView>
-            <ImageView fitHeight="39.24485397338867" fitWidth="244.99998474121094" layoutX="0.0" layoutY="39.0" onMouseClicked="#BMICalculator" pickOnBounds="true" preserveRatio="false">
-              <image>
-                <Image url="@Images/BmiCalculator.PNG" />
-              </image>
-            </ImageView>
-            <ImageView fitHeight="39.24488067626953" fitWidth="245.0" layoutX="0.0" layoutY="78.0" onMouseClicked="#NumberApp" pickOnBounds="true" preserveRatio="false">
-              <image>
-                <Image url="@Images/Numbers.png" />
-              </image>
-            </ImageView>
-          </children>
-        </AnchorPane>
-      </content>
-    </TitledPane>
     <Button fx:id="changeImage" font="$x2" layoutX="24.0" layoutY="100.0" mnemonicParsing="false" onAction="#changeImage" text="Change Picture">
       <effect>
         <DropShadow height="17.0" radius="8.0" width="17.0" />
       </effect>
     </Button>
+    <Button fx:id="addProgram" layoutX="399.0" layoutY="358.0" mnemonicParsing="false" onAction="#addProgram" text="Add Program From Seriel Key">
+      <effect>
+        <DropShadow height="17.0" radius="8.0" width="17.0" />
+      </effect>
+    </Button>
+    <ListView fx:id="programs" layoutX="24.0" layoutY="137.0" onMouseClicked="#selectProgram" prefHeight="213.0" prefWidth="469.0" />
+    <Button fx:id="startThis" disable="true" layoutX="508.0" layoutY="137.0" mnemonicParsing="false" onAction="#startProgrm" opacity="0.6" text="Start" />
   </children>
 </AnchorPane>

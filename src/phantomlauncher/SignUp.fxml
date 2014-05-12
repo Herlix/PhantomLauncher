@@ -17,17 +17,17 @@
         <Image url="@Images/Background.jpg" preserveRatio="true" smooth="true" />
       </image>
     </ImageView>
-    <Label layoutX="119.0" layoutY="22.0" text="Username:" textFill="WHITE" />
-    <Label layoutX="122.0" layoutY="57.0" text="Password:" textFill="WHITE" />
-    <Label layoutX="76.0" layoutY="99.0" text="Confirm password:" textFill="WHITE" />
-    <Label layoutX="117.0" layoutY="134.0" text="First name:" textFill="WHITE" />
-    <Label layoutX="118.0" layoutY="167.0" text="Last name:" textFill="WHITE" />
-    <Label layoutX="151.0" layoutY="203.0" text="Age:" textFill="WHITE" />
-    <Label layoutX="139.0" layoutY="247.0" text="E-mail:" textFill="WHITE" />
-    <Label layoutX="93.0" layoutY="282.0" text="Confirm E-mail:" textFill="WHITE" />
+    <Label layoutX="109.0" layoutY="22.0" text="Username:" textFill="WHITE" />
+    <Label layoutX="113.0" layoutY="60.0" text="Password:" textFill="WHITE" />
+    <Label layoutX="55.0" layoutY="99.0" text="Confirm password:" textFill="WHITE" />
+    <Label layoutX="107.0" layoutY="134.0" text="First name:" textFill="WHITE" />
+    <Label layoutX="109.0" layoutY="170.0" text="Last name:" textFill="WHITE" />
+    <Label layoutX="149.0" layoutY="203.0" text="Age:" textFill="WHITE" />
+    <Label layoutX="134.0" layoutY="247.0" text="E-mail:" textFill="WHITE" />
+    <Label layoutX="77.0" layoutY="282.0" text="Confirm E-mail:" textFill="WHITE" />
     <TextField fx:id="signUpUserName" focusTraversable="false" layoutX="183.0" layoutY="19.0" prefWidth="200.0" promptText="Username" text="" />
     <PasswordField fx:id="signUpPassword" disable="false" focusTraversable="false" layoutX="183.0" layoutY="57.0" onMouseClicked="#checkInput" opacity="1.0" prefWidth="200.0" promptText="Password at least 6 signs" />
-    <PasswordField id="signUpConfirm" fx:id="signUpPassConfirm" disable="false" focusTraversable="false" layoutX="183.0" layoutY="96.0" opacity="1.0" prefWidth="200.0" promptText="Confirm Password" />
+    <PasswordField id="signUpConfirm" fx:id="signUpPassConfirm" disable="false" focusTraversable="false" layoutX="183.0" layoutY="96.0" onMouseClicked="#checkInput" opacity="1.0" prefWidth="200.0" promptText="Confirm Password" />
     <TextField fx:id="signUpFirstName" disable="false" focusTraversable="false" layoutX="183.0" layoutY="131.0" onMouseClicked="#checkInput" opacity="1.0" prefWidth="200.0" promptText="First Name" text="" />
     <TextField fx:id="signUpLastName" disable="false" focusTraversable="false" layoutX="183.0" layoutY="167.0" opacity="1.0" prefWidth="200.0" promptText="Last Name" text="" />
     <ChoiceBox fx:id="yearAge" disable="false" focusTraversable="false" layoutX="182.0" layoutY="200.0" opacity="1.0">
@@ -119,7 +119,7 @@
         </FXCollections>
       </items>
     </ChoiceBox>
-    <ChoiceBox fx:id="monthAge" disable="false" focusTraversable="false" layoutX="263.0" layoutY="200.0" opacity="1.0" prefWidth="52.0">
+    <ChoiceBox fx:id="monthAge" disable="false" focusTraversable="false" layoutX="283.0" layoutY="200.0" opacity="1.0" prefWidth="89.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Jan" />
@@ -137,7 +137,7 @@
         </FXCollections>
       </items>
     </ChoiceBox>
-    <ChoiceBox fx:id="dayAge" disable="false" focusTraversable="false" layoutX="338.0" layoutY="200.0" opacity="1.0" prefWidth="45.0">
+    <ChoiceBox fx:id="dayAge" disable="false" focusTraversable="false" layoutX="383.0" layoutY="200.0" opacity="1.0" prefWidth="85.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="01" />
@@ -176,7 +176,7 @@
     </ChoiceBox>
     <TextField id="signUpEmail" fx:id="SignUpEmail" disable="false" focusTraversable="false" layoutX="182.0" layoutY="244.0" opacity="1.0" prefWidth="200.0" promptText="Email Adress" text="" />
     <TextField id="signUpEmail" fx:id="SignUpEmailConfirm" disable="false" focusTraversable="false" layoutX="183.0" layoutY="279.0" onMouseClicked="#checkInput" opacity="1.0" prefWidth="200.0" promptText="Confirm Email" text="" />
-    <CheckBox fx:id="accept" disable="true" focusTraversable="false" layoutX="184.0" layoutY="318.0" mnemonicParsing="false" onMouseClicked="#checkInput" opacity="1.0" text="I understand and accept the terms of this program." textFill="#8fff00">
+    <CheckBox fx:id="accept" disable="false" focusTraversable="false" layoutX="184.0" layoutY="318.0" mnemonicParsing="false" onMouseClicked="#checkInput" opacity="1.0" text="I understand and accept the terms of this program." textFill="#8fff00">
       <effect>
         <DropShadow />
       </effect>

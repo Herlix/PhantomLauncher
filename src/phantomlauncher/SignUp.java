@@ -3,7 +3,6 @@ package phantomlauncher;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,10 +53,6 @@ public class SignUp implements Initializable, ScreenInterface {
     private TextField SignUpEmailConfirm;
     @FXML
     private Button signUpButton;
-    @FXML
-    private Button closeDown;
-    @FXML
-    private Button checkAll;
     @FXML
     private Label userError;
     @FXML
@@ -128,33 +123,12 @@ public class SignUp implements Initializable, ScreenInterface {
         age = (String) yearAge.getSelectionModel().getSelectedItem() + " - " + (String) monthAge.getSelectionModel().getSelectedItem() + " - " + (String) dayAge.getSelectionModel().getSelectedItem();
         email = SignUpEmail.getText();
         emailConfirm = SignUpEmailConfirm.getText();
+        
+        checkUserName(userName);
+        checkPassword(password, passwordConfirm);
+        checkEmail(email, emailConfirm);
 
-        if (!signUpUserName.getText().equals("")) {
-            checkUserName(userName);
-        }
-
-        if (!signUpPassword.getText().equals("")) {
-            if (signUpPassword.getText().length() > 5) {
-                if (!signUpPassword.getText().equals("") && !signUpPassConfirm.getText().equals("")) {
-                    checkPassword(password, passwordConfirm);
-                }
-            } else {
-                passError1.setText("password to short");
-            }
-        }
-
-        if (!SignUpEmail.getText().equals("")) {
-            if (SignUpEmail.getText().equals(SignUpEmailConfirm.getText())) {
-                if (checkEmail(email, emailConfirm)) {
-                    accept.setDisable(false);
-                } else {
-                    emailError.setText("Email does not match each other");
-                }
-
-            }
-        }
-
-        if (accept.isSelected() && checkUserName(userName) && checkEmail(email, emailConfirm) && checkPassword(password, passwordConfirm) && !age.equals("") && !userName.equals("") && !lastName.equals("")) {
+        if (checkUserName(userName) && checkPassword(password, passwordConfirm) && !firstName.equals("") &&!lastName.equals("") && !age.equals("") && checkEmail(email, emailConfirm) && accept.isSelected()) {
             signUpButton.setDisable(false);
         }
     }
@@ -193,10 +167,12 @@ public class SignUp implements Initializable, ScreenInterface {
         String mySqlInlog = "CREATE USER '" + userName.toLowerCase() + "'@'localhost' IDENTIFIED BY '" + password + "'";
         String mySqlGrant = "GRANT SELECT, UPDATE, INSERT, DELETE ON phantom.* TO '" + userName.toLowerCase() + "'@'localhost';";
         String addToDB = "INSERT INTO Users VALUES( '" + userName + "','" + firstName + "','" + lastName + "','" + age + "','" + email + "');";
+        String addToValidate = "INSERT INTO validation VALUES( 0,'','','" + userName + "');";
         try {
             st.execute(mySqlInlog);
             st.execute(mySqlGrant);
             st.execute(addToDB);
+            st.execute(addToValidate);
             mCon.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -205,13 +181,21 @@ public class SignUp implements Initializable, ScreenInterface {
 
     public static boolean checkEmail(String email, String emailConfirm) {
         emailError.setText("");
+        boolean checkEmail = false;
         for (int i = 0; i < email.length(); i++) {
-            if (email.charAt(i) == '@' && email.length() > 5 && email.equals(emailConfirm)) {
+            if (email.charAt(i) == '@' && email.length() > 5) {
                 emailError.setText("");
-                return true;
+                checkEmail = true;
+                break;
+            } else {
+                emailError.setText("Invalid Entry");
             }
         }
-        emailError.setText("Invalid Entry");
+        if (email.equals(emailConfirm) && checkEmail) {
+                return true;
+        } else if (!emailConfirm.equals("")) {
+            emailError.setText("Emails do not match!");
+        }
         return false;
     }
 
@@ -227,7 +211,7 @@ public class SignUp implements Initializable, ScreenInterface {
             ResultSet rs = st.executeQuery(getId);
             while (rs.next()) {
                 String id = rs.getString("idUsers");
-                if (id.equals(userName)) {
+                if (id.equals(userName) || userName.equals("")) {
                     userError.setText("Name taken!");
                     return false;
                 }
@@ -239,17 +223,22 @@ public class SignUp implements Initializable, ScreenInterface {
     }
 
     private boolean checkPassword(String password, String passwordConfirm) {
+        passError1.setText("");
+        if (password.equals("")) {
+            return false;
+        }
         if (password.length() < 6) {
             passError1.setText("Password to short!");
             return false;
         }
         passError1.setText("");
+        passError2.setText("");
         if (passwordConfirm.equals(password)) {
-            passError2.setText("");
             return true;
-        } else {
+        } else if (!passwordConfirm.equals("")){
             passError2.setText("Password does not match!");
             return false;
         }
+        return false;
     }
 }

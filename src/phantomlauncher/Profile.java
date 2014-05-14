@@ -132,8 +132,6 @@ public class Profile implements Initializable, ScreenInterface {
      */
     public void passwordChanger() {
         try {
-            JPasswordField pf = new JPasswordField();
-
             String oldPass = JOptionPane.showInputDialog("Enter your old Password");
             if (oldPass.equals(Login.dbPasswd)) {
                 String password = JOptionPane.showInputDialog("Enter Password");
@@ -247,8 +245,7 @@ public class Profile implements Initializable, ScreenInterface {
 
             updateProgramList();
         } catch (Exception e) {
-            System.err.println(e);
-            //JOptionPane.showMessageDialog(null, "Invalid entry Try again");
+            JOptionPane.showMessageDialog(null, "Invalid entry, try again");
         }
     }
 

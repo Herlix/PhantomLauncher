@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -131,14 +132,25 @@ public class Profile implements Initializable, ScreenInterface {
      */
     public void passwordChanger() {
         try {
-            String password = JOptionPane.showInputDialog("Enter Password");
-            String passConfirm = JOptionPane.showInputDialog("Enter Password again");
-            if (password.length() > 5 && password.equals(passConfirm)) {
-                try {
-                    String set = "SET password FOR '" + userName.getText() + "'@'localhost'=PASSWORD('" + password + "')";
-                    st.executeQuery(set);
-                    JOptionPane.showMessageDialog(null, "Your password has been changed!");
-                } catch (Exception ex) {
+            JPasswordField pf = new JPasswordField();
+
+            String oldPass = JOptionPane.showInputDialog("Enter your old Password");
+            if (oldPass.equals(Login.dbPasswd)) {
+                String password = JOptionPane.showInputDialog("Enter Password");
+                if (!password.equals(Login.dbPasswd)) {
+                    String passConfirm = JOptionPane.showInputDialog("Enter Password again");
+                    if (!passConfirm.equals(Login.dbPasswd) && password.length() > 5 && password.equals(passConfirm)) {
+                        String set = "SET password FOR '" + userName.getText() + "'@'localhost'=PASSWORD('" + password + "')";
+                        st.executeQuery(set);
+                        Login.dbPasswd = password;
+                        JOptionPane.showMessageDialog(null, "Your password has been changed!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Invalid Entry");
+                        passwordChanger();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "New password can't match old password");
+                    passwordChanger();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid Entry");
@@ -147,6 +159,7 @@ public class Profile implements Initializable, ScreenInterface {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Password Not Changed");
         }
+
     }
 
     /**
@@ -162,23 +175,24 @@ public class Profile implements Initializable, ScreenInterface {
     public void changeEmailAdress() {
         try {
             String emailChange = JOptionPane.showInputDialog("Enter Email");
-            String emailConfirm = JOptionPane.showInputDialog("Enter Email again");
-            if (SignUp.checkEmail(emailChange, emailConfirm)) {
-                try {
+            if (emailChange.contains("@") && emailChange.contains(".") && emailChange.length() > 5 && !emailChange.equals(email.getText())) {
+                String emailConfirm = JOptionPane.showInputDialog("Enter Email again");
+                if (SignUp.checkEmail(emailChange, emailConfirm)) {
                     String set = "UPDATE phantom.Users SET email = '" + emailChange + "' WHERE idUsers = '" + userName.getText() + "'";
                     st.execute(set);
+                    email.setText(emailChange);
                     JOptionPane.showMessageDialog(null, "Your email has been changed!");
-                    getInfo();
-                } catch (Exception ex) {
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid entry or input did not match");
+                    changeEmailAdress();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Invalid entry or input did not match");
+                JOptionPane.showMessageDialog(null, "Invalid entry");
                 changeEmailAdress();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Email Not Changed");
         }
-
     }
 
     public String runProgram(String runThis) throws SQLException {
@@ -196,7 +210,6 @@ public class Profile implements Initializable, ScreenInterface {
 
     public void changeImage() {
         try {
-
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Choose Image");
             fileChooser.getExtensionFilters().addAll(
@@ -204,14 +217,13 @@ public class Profile implements Initializable, ScreenInterface {
                     new ExtensionFilter("All Files", "*.*"));
             File selectedFile = fileChooser.showOpenDialog(ScreenController.stage);
             if (selectedFile != null) {
-                File file = selectedFile;               
+                File file = selectedFile;
                 File desc = new File((new File("")).getParentFile() + file.getName());
                 FileUtils.copyFile(file, desc);
                 Image img = new Image(desc.toURI().toURL().toExternalForm());
                 st.execute("UPDATE phantom.Users SET image = '" + desc.toURI().toURL().toExternalForm() + "' WHERE idUsers = '" + Login.dbUser + "';");
                 profileImage.setImage(img);
                 profileImage.setFitWidth(85);
-
             }
         } catch (Exception e) {
             System.err.println(e);

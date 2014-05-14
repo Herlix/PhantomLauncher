@@ -108,7 +108,10 @@ public class SignUp implements Initializable, ScreenInterface {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
-
+    
+    /*
+     Runs each time you click on a field to check the input while you sign up.
+     */
     public void checkInput() throws SQLException {
         if (once == false) {
             masterLogin();
@@ -123,12 +126,12 @@ public class SignUp implements Initializable, ScreenInterface {
         age = (String) yearAge.getSelectionModel().getSelectedItem() + " - " + (String) monthAge.getSelectionModel().getSelectedItem() + " - " + (String) dayAge.getSelectionModel().getSelectedItem();
         email = SignUpEmail.getText();
         emailConfirm = SignUpEmailConfirm.getText();
-        
+
         checkUserName(userName);
         checkPassword(password, passwordConfirm);
         checkEmail(email, emailConfirm);
 
-        if (checkUserName(userName) && checkPassword(password, passwordConfirm) && !firstName.equals("") &&!lastName.equals("") && !age.equals("") && checkEmail(email, emailConfirm) && accept.isSelected()) {
+        if (checkUserName(userName) && checkPassword(password, passwordConfirm) && !firstName.equals("") && !lastName.equals("") && !age.equals("") && checkEmail(email, emailConfirm) && accept.isSelected()) {
             signUpButton.setDisable(false);
         }
     }
@@ -179,20 +182,22 @@ public class SignUp implements Initializable, ScreenInterface {
         }
     }
 
+    /*
+     A method used to check that the input is an email and that the two input matches eachother.
+     */
     public static boolean checkEmail(String email, String emailConfirm) {
         emailError.setText("");
         boolean checkEmail = false;
-        for (int i = 0; i < email.length(); i++) {
-            if (email.charAt(i) == '@' && email.length() > 5) {
-                emailError.setText("");
-                checkEmail = true;
-                break;
-            } else {
-                emailError.setText("Invalid Entry");
-            }
+        if (email.contains("@") && email.contains(".") && email.length() > 5) {
+            emailError.setText("");
+            checkEmail = true;
+        } else {
+            emailError.setText("Invalid Entry");
         }
+
         if (email.equals(emailConfirm) && checkEmail) {
-                return true;
+            emailError.setText("");
+            return true;
         } else if (!emailConfirm.equals("")) {
             emailError.setText("Emails do not match!");
         }
@@ -222,6 +227,9 @@ public class SignUp implements Initializable, ScreenInterface {
         return true;
     }
 
+    /*
+     Used to check that the password is valid and that the two inputs match.
+     */
     private boolean checkPassword(String password, String passwordConfirm) {
         passError1.setText("");
         if (password.equals("")) {
@@ -235,7 +243,7 @@ public class SignUp implements Initializable, ScreenInterface {
         passError2.setText("");
         if (passwordConfirm.equals(password)) {
             return true;
-        } else if (!passwordConfirm.equals("")){
+        } else if (!passwordConfirm.equals("")) {
             passError2.setText("Password does not match!");
             return false;
         }

@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.text.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -54,7 +55,8 @@ public class Login implements Initializable, ScreenInterface {
         try {
             sshConnect();
         } catch (Exception ex) {
-            error.setText("Failed to login");
+            JOptionPane.showMessageDialog(null, "Failed to connect!");
+            System.exit(0);
         }
     }
 

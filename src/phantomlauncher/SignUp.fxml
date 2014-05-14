@@ -19,12 +19,12 @@
     </ImageView>
     <Label layoutX="109.0" layoutY="22.0" text="Username:" textFill="WHITE" />
     <Label layoutX="113.0" layoutY="60.0" text="Password:" textFill="WHITE" />
-    <Label layoutX="55.0" layoutY="99.0" text="Confirm password:" textFill="WHITE" />
+    <Label layoutX="66.0" layoutY="102.0" text="Confirm password:" textFill="WHITE" />
     <Label layoutX="107.0" layoutY="134.0" text="First name:" textFill="WHITE" />
     <Label layoutX="109.0" layoutY="170.0" text="Last name:" textFill="WHITE" />
-    <Label layoutX="149.0" layoutY="203.0" text="Age:" textFill="WHITE" />
-    <Label layoutX="134.0" layoutY="247.0" text="E-mail:" textFill="WHITE" />
-    <Label layoutX="77.0" layoutY="282.0" text="Confirm E-mail:" textFill="WHITE" />
+    <Label layoutX="142.0" layoutY="205.0" text="Age:" textFill="WHITE" />
+    <Label layoutX="130.0" layoutY="244.0" text="E-mail:" textFill="WHITE" />
+    <Label layoutX="84.0" layoutY="282.0" text="Confirm E-mail:" textFill="WHITE" />
     <TextField fx:id="signUpUserName" focusTraversable="false" layoutX="183.0" layoutY="19.0" prefWidth="200.0" promptText="Username" text="" />
     <PasswordField fx:id="signUpPassword" disable="false" focusTraversable="false" layoutX="183.0" layoutY="57.0" onMouseClicked="#checkInput" opacity="1.0" prefWidth="200.0" promptText="Password at least 6 signs" />
     <PasswordField id="signUpConfirm" fx:id="signUpPassConfirm" disable="false" focusTraversable="false" layoutX="183.0" layoutY="96.0" onMouseClicked="#checkInput" opacity="1.0" prefWidth="200.0" promptText="Confirm Password" />
@@ -119,7 +119,7 @@
         </FXCollections>
       </items>
     </ChoiceBox>
-    <ChoiceBox fx:id="monthAge" disable="false" focusTraversable="false" layoutX="283.0" layoutY="200.0" opacity="1.0" prefWidth="89.0">
+    <ChoiceBox fx:id="monthAge" disable="false" focusTraversable="false" layoutX="256.0" layoutY="200.0" opacity="1.0" prefWidth="73.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Jan" />
@@ -137,7 +137,7 @@
         </FXCollections>
       </items>
     </ChoiceBox>
-    <ChoiceBox fx:id="dayAge" disable="false" focusTraversable="false" layoutX="383.0" layoutY="200.0" opacity="1.0" prefWidth="85.0">
+    <ChoiceBox fx:id="dayAge" disable="false" focusTraversable="false" layoutX="338.0" layoutY="200.0" opacity="1.0" prefWidth="64.9998779296875">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="01" />
@@ -211,5 +211,6 @@
     <Label fx:id="passError1" layoutX="226.0" layoutY="41.0" text="" textFill="RED" />
     <Label fx:id="passError2" layoutX="214.0" layoutY="79.0" text="" textFill="RED" />
     <Label fx:id="emailError" layoutX="241.0" layoutY="228.0" text="" textFill="RED" />
+    <TextField alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="421.0" layoutY="57.0" prefHeight="209.0" prefWidth="165.0" promptText="" text="" />
   </children>
 </AnchorPane>

@@ -230,20 +230,25 @@ public class Profile implements Initializable, ScreenInterface {
         }
     }
 
-    public void addProgram(ActionEvent event) throws SQLException {
+    public void addProgram(ActionEvent event) {
         try {
+            String app = "";
             String input = JOptionPane.showInputDialog("Enter serial");
-            if (input.equals("ALJ8-UTLE-8UlP-2OGC")) {
-                st.execute("UPDATE phantom.validation SET BmiCalculator = 'BmiCalculator' WHERE Users_idUsers = '" + Login.dbUser + "';");
-                updateProgramList();
-            } else if (input.equals("1KDG-1111-39UG-9UIG")) {
-                st.execute("UPDATE phantom.validation SET NumberApp = 'NumberApp' WHERE Users_idUsers = '" + Login.dbUser + "';");
-                updateProgramList();
-            } else {
-                JOptionPane.showMessageDialog(null, "Invalid input!, try again");
-            }
-        } catch (Exception e) {
+            String read = "Select * from phantom.activision WHERE serial = '" + input + "';";
+            ResultSet rs = st.executeQuery(read);
+            rs.next();
+            app = rs.getString("application");
 
+            String add = "INSERT INTO phantom.validation VALUES( '0','" + Login.dbUser + "','" + app + "','" + input + "');";
+            st.execute(add);
+
+            String delete = "DELETE FROM phantom.activision WHERE serial = '" + input + "';";
+            st.executeUpdate(delete);
+
+            updateProgramList();
+        } catch (Exception e) {
+            System.err.println(e);
+            //JOptionPane.showMessageDialog(null, "Invalid entry Try again");
         }
     }
 
@@ -253,12 +258,7 @@ public class Profile implements Initializable, ScreenInterface {
             String read = "Select * from phantom.validation WHERE Users_idUsers = '" + Login.dbUser + "';";
             ResultSet rs = st.executeQuery(read);
             while (rs.next()) {
-                if (!rs.getString("BmiCalculator").equals("")) {
-                    items.addAll(rs.getString("BmiCalculator") + " - A simple BMI calculator");
-                }
-                if (!rs.getString("NumberApp").equals("")) {
-                    items.addAll(rs.getString("NumberApp") + " - A simple app for saving your numbers and notes");
-                }
+                items.addAll(rs.getString("Applications"));
             }
             programs.setItems(items);
             programs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

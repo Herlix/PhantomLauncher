@@ -20,7 +20,6 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -40,12 +39,6 @@ public class Profile implements Initializable, ScreenInterface {
     private static Text email;
     @FXML
     private static ImageView profileImage;
-    @FXML
-    private static ImageView boulderDash;
-    @FXML
-    private static ImageView BmiCalculator;
-    @FXML
-    private Button loadInfo;
     @FXML
     private static ListView programs;
     @FXML
@@ -93,7 +86,7 @@ public class Profile implements Initializable, ScreenInterface {
     }
 
     /**
-     * Used to get user info and diplay it.
+     * Used to get user info and display it.
      */
     public static void getInfo() {
         try {
@@ -109,10 +102,12 @@ public class Profile implements Initializable, ScreenInterface {
                 if (!rs.getString("image").equals("")) {
                     String path = rs.getString("image");
                     try {
+                        Image popeye = new Image("./Images/Popeye.jpg");
+                        profileImage.setImage(popeye);
                         Image image = new Image(path);
                         profileImage.setImage(image);
                         profileImage.setFitWidth(85);
-                    } catch (Exception bild) {
+                    } catch (Exception picture) {
                     }
                 }
             }
@@ -172,10 +167,10 @@ public class Profile implements Initializable, ScreenInterface {
      */
     public void changeEmailAdress() {
         try {
-            String emailChange = JOptionPane.showInputDialog("Enter Email");
+            String emailChange = JOptionPane.showInputDialog("Enter new Email");
             if (emailChange.contains("@") && emailChange.contains(".") && emailChange.length() > 5 && !emailChange.equals(email.getText())) {
                 String emailConfirm = JOptionPane.showInputDialog("Enter Email again");
-                if (SignUp.checkEmail(emailChange, emailConfirm)) {
+                if (emailChange.equals(emailConfirm)) {
                     String set = "UPDATE phantom.Users SET email = '" + emailChange + "' WHERE idUsers = '" + userName.getText() + "'";
                     st.execute(set);
                     email.setText(emailChange);

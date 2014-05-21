@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.text.*;
 import javax.swing.JOptionPane;
@@ -30,12 +29,6 @@ public class Login implements Initializable, ScreenInterface {
     private PasswordField passID;
     @FXML
     private Text error;
-    @FXML
-    private Button login;
-    @FXML
-    private Button signUp;
-    @FXML
-    private Button closeDown;
 
     private ScreenController screen;
 
